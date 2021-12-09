@@ -1,1 +1,259 @@
-<h1>Daily Grind</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>LARGEBUCK$ Coffee</title>
+    <meta name="robots" content="noindex,nofollow" />
+	<!-- below is a google font, go to https://www.google.com/fonts to get yours! -->
+	<link href='https://fonts.googleapis.com/css?family=Holtwood+One+SC' rel='stylesheet' type='text/css'>
+	<link id="mainStylesheet" rel="stylesheet" href="css/default.css" />
+    <style type="text/css">
+	
+        html {background-color:#FF7518;/* pumpkin - overwrites default */}
+        
+        .feature {color:#FF7518; /* daily feature color - pumpkin! */}
+        
+		.masthead{
+			font-family: 'Holtwood One SC', serif; /* required for google font */
+			font-size:3em;
+		}
+	
+		#logo{
+			float:right;
+			display:inline-block;
+			padding:2px;
+			max-width:100px; /* actual size of image */
+			width:20%; /* approximate size taken on screen in maximum view */
+		}
+	
+		#coffee {
+			float:left;
+			display:inline-block;
+			padding:20px;
+			max-width:300px; /* best if actual size of image */
+			width:33%; /* approximate size taken on screen in maximum view */
+		}
+
+        h3.slogan{
+           font-style:italic; /* make the slogan italics */ 
+        }
+    </style>
+   
+    <!--[if ltIE9]>
+       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+     <![endif]-->
+</head>
+<body>
+	<header>
+	    <img src="images/largebucks-logo.jpg" alt="You drink our coffee, we make large bucks!" class="flexible" id="logo" />
+		<h1 class="masthead">LARGEBUCK$ COFFEE</h1>
+		<h4>This webpage uses HTML/CSS & JavaScript to create a single page that rotates unique colors and content for each weekday (Sunday to Saturday) into a page.</h4>
+	</header>
+    <main>
+		 <header><h3 class="slogan">You drink our coffee, we make large bucks!</h3></header>
+		<div id="coffeeTarget"></div>
+
+		<p>Click below to view the coffee special for different days of the week</p>
+		<p><a href="?day=0">Sunday</a></p>
+		<p><a href="?day=1">Monday</a></p>
+		<p><a href="?day=2">Tuesday</a></p>
+		<p><a href="?day=3">Wednesday</a></p>
+		<p><a href="?day=4">Thursday</a></p>
+		<p><a href="?day=5">Friday</a></p>
+		<p><a href="?day=6">Saturday</a></p>
+		
+		 <!--
+         <p>
+    		 <img src="images/pumpkin-spice-latte.jpg" alt="Our Pumpkin Spice Latte tastes great on a Fall Day!" id="coffee" />
+            <strong>Monday's Coffee Special:</strong> Monday's daily coffee special is <strong>Pumpkin Spice Latte</strong>, which makes us wish it was always Fall, as this is one of our top sellers!
+		</p>
+		-->
+     </main>
+    <footer>
+      <small>&copy; 2014-2015, All Rights Reserved ~
+      <a href="http://validator.w3.org/check/referer" target="_blank">Valid HTML</a> ~
+      <a href="http://jigsaw.w3.org/css-validator/check?uri=referer" target="_blank">Valid CSS</a>
+      </small>
+    </footer>
+    <!-- END Footer -->
+	<script> 
+		
+		/*
+		
+			Use HTML/CSS & JavaScript to create a single page that rotates unique colors and content for each weekday (Sunday to Saturday) into a page.  
+			
+			The content must include:
+
+			One unique image, with appropriate and matching content in the alt tag.  
+			
+			A paragraph or two of content that describes the daily item (paragraph must include the name of the highlighted weekday)
+			
+			A unique color that supports the image and paragraph of content
+
+
+
+
+		
+		*/
+		
+		function coffeeTemplate(coffee){
+			let myReturn = "";
+
+			myReturn += `<p>
+             <img src="images/${coffee.pic}" alt="${coffee.alt}" />
+            <strong>${coffee.weekday}'s Coffee Special:</strong> ${coffee.weekday}'s daily coffee 
+			special is <strong>${coffee.coffee}</strong>, ${coffee.description}
+        </p>`;
+			return myReturn;
+		}
+
+		//use location object to access querystring (address bar)
+		const queryString = window.location.search;
+    
+		//output to console    
+		console.log(queryString);
+		
+		//separate querystring parameters
+		const urlParams = new URLSearchParams(queryString);
+		
+		
+		let myDate = new Date();
+
+		let today = myDate.getDay();
+		let coffee = "";//will be an object
+
+
+		if(urlParams.has("day")){
+			today = urlParams.get("day");
+			today = parseInt(today);
+		}
+
+		
+		switch(today){
+			case 0:coffee
+				today = "Sunday";
+
+				coffee = {
+					pic: "mocha.jpg",
+					alt: "A pic of mocha", 
+					color: "#844c6f", 
+					description: `When something is referred to as mocha flavored, it's because it blends the flavors of chocolate and coffee. It's sweet like chocolate but with the roasty 
+					qualities of a cup of coffee. Mocha powders will have the same consistency of cocoa powder, but if you add a touch liquid, they'll turn into thin pastes. If you've got a 
+					natural mocha powder, it may even be a little silty. Mocha syrups can have a more viscous quality. This sweet beverage is a blend of espresso, steamed milk (cafes usually 
+					have vegan milk options available) and chocolate powder or syrup. `,
+					coffee: "Mocha",
+					weekday: "Sunday"
+				}
+			break;
+
+			case 1:coffee
+				today = "Monday";
+
+				coffee = {
+					pic: "bubble-tea.jpg",
+					alt: "A pic of bubble tea", 
+					color: "#a2b168", 
+					description: `Bubble tea tastes like a well balanced and sweet milky beverage with a slight twist, boba pearls. Though sweet, it's not overpoweringly sweet 
+					since teas counteract sweetness and creaminess of boba flavors. Generally boba cafes will make a concentrate of tea and use this as the base of their milk teas. 
+					Depending on what tea they use you'll taste robust black teas, light green teas or even lighter jasmine teas. Sometimes there's even herbal teas used in certain 
+					types of drinks.`,
+					coffee: "Bubble Tea",
+					weekday: "Monday"
+				}
+			break;
+
+			case 2:coffee
+				today = "Tuesday";
+
+				coffee = {
+					pic: "caramel-latte.jpg",
+					alt: "A pic of caramel latte", 
+					color: "#eab676",
+					description: `The caramel latte is another well-loved drink. And while some may confuse it with the caramel macchiato, it's much simpler to make. 
+					This drink is sweetened with caramel syrup. Once the syrup is added, you simply need to add your shots, pour steamed milk and milk foam on top. 
+					This helps create a pleasant coffee-caramel taste throughout the drink. Much like with the caramel macchiato, you can try countless variations on 
+					this drink. Caramel is a flavor that agrees with dairy and non-dairy milk, although it goes especially well with the light, sweet flavor of coconut milk.`,
+					coffee: "Caramel Latte",
+					weekday: "Tuesday"
+				}
+			break;
+
+			case 3:coffee
+				today = "Wednesday";
+
+				coffee = {
+					pic: "pumpkin-spice-latte.jpg",
+					alt: "Pumpkin Spice Latte", 
+					color: "#1bb6ac",
+					description: `The first few sips (or, to be more accurate licks) of whipped cream at the top with pumpkin-spice sprinkles are heavenly. 
+					It's hot and sweet with a very lightly spicy sweetness, a very pleasant but not overpowering fragrance and I could totally see myself buying 
+					a bag of Starbucks pumpkin-spice flavored instant coffee (or DIYing it at home with the contents of my meagre spice cabinet). Pumpkin Spice Lattes are awesome!`,
+					coffee: "Pumpkin Spice Latte",
+					weekday: "Wednesday"
+				}
+			break;
+
+			case 4:coffee
+				today = "Thursday";
+
+				coffee = {
+					pic: "cold-brew.jpg",
+					alt: "A pic of cold brew", 
+					color: "#802e36", 
+					description: `Cold brew has the potential to be some of the most even, flavorful, and delicious coffee that you can even question whether or not you're 
+					even drinking coffee. A good cold brew shouldn't need cream or sugar as it should have an inherent sweetness (good quality beans brewed correctly can taste 
+					sweet without additives) and it should be smooth enough to not need a cream or milk. However, if you want to add it, more power to you.`,
+					coffee: "Cold Brew",
+					weekday: "Thursday"
+				}
+			break;
+
+			case 5:coffee
+				today = "Friday";
+
+				coffee = {
+					pic: "drip.jpg",
+					alt: "A pic of drip", 
+					color: "#4f0e52",
+					description: `Aah, yes. The classic electric coffee maker you know and love. To get your brew going in a drip coffee maker, 
+					all you have to do is scoop your coffee, pour it into the filter, pour some water in and press start to let the drip coffee maker 
+					do its coffee magic. Soon, you'll hear the sweet sounds of your coffee dripping right into your coffee pot. Mornings, conquered.`, 
+					coffee: "Drip",
+					weekday: "Friday"
+				}
+			break;
+
+			case 6:coffee
+				today = "Saturday";
+
+				coffee = {
+					pic: "frappaccino.jpg",
+					alt: "A pic of frappaccino", 
+					color: "#7eb7fe",
+					description: `Frappuccino is a portmanteau of frappe and cappuccino, an espresso coffee with frothed milk. It is unclear whether 
+					frappe is taken from frappé, a Greek iced coffee, or from the Boston area term for a thick milkshake frappe (pronounced "frap"), 
+					both of which come from the French word frappé.The Frappuccino is a blended iced coffee drink that's topped with whipped cream and syrup. 
+					But not all Frapps are made the same: watch out for coffee-free versions. Unless you're into that sorta thing.`,
+					coffee: "Frappaccinos",
+					weekday: "Saturday"
+				}
+			break;
+
+			default:
+				today = "Incorrect Day";
+
+		}
+
+		document.getElementById("coffeeTarget").innerHTML = coffeeTemplate(coffee);
+
+		document.querySelector("html").style.backgroundColor = coffee.color;
+
+		console.log(today);
+
+		console.log(coffee);
+		
+		//alert("hi there!");
+    </script>
+	
+</body>
+</html>
